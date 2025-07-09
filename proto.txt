@@ -1,0 +1,24 @@
+создали папку gen в корне проекта в ней папки go -> sso 
+
+
+protoc -I proto proto/sso/sso.proto --go_out=./gen/go --go_opt=paths=source_relative --go-grpc_out=./gen/go/ --go-grpc_opt=paths=source_relative
+
+-I — указывает корень импорта .proto файлов.
+Без него protoc не поймёт, где искать импортируемые .proto.
+
+ proto - папка 
+ proto/sso/sso.proto - путь от папки до файла с proto
+ sso.proto - имя файла с proto
+ --go_out=./gen/go - куда будут сохранятся сгенерированные файлы 
+ --go_opt=paths=source_relative - говорит что сгенерированные файлы будут использовать тот же пакет что и мои протофайлы исходные 
+
+ --go-grpc_out=./gen/go/  - говорит куда складывать сгенерированный код GRPC
+ --go-grpc_opt=paths=source_relative - говорит что сгенерированные файлы будут использовать тот же пакет что и мои протофайлы исходные
+
+ protoc \
+  -I proto \
+  proto/sso/sso.proto \
+  --go_out=./gen/go \
+  --go_opt=paths=source_relative \
+  --go-grpc_out=./gen/go/ \
+  --go-grpc_opt=paths=source_relative
